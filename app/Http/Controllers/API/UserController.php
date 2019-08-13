@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\User;
 use App\Role;
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
@@ -46,26 +47,12 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
-        $user->save();
-        $namaRole = 'admin'; // Disini Desripsikan nama role nya yang akan di pilih [Table = Roles];
-        $role = Role::where('name', $namaRole)->first();
-        $user->attachRole($role); // User yang telah dibuat, sekaligus diberikan sebuah rolenya sekaligus
-        $response = [
-            'success' => true,
-            'data'    => $user,
-            'message' => 'Data user baru dengan nama ' . $request->name . ' berhasil ditambahkan'
-        ];
+        $user->save;
 
-        // $user = new User();
-        // $user->name = $request->name;
-        // $user->email = $request->email;
-        // $user->password = Hash::make($request->password);
-        // $user->save();
+        $role = Role::where('name', 'admin')->first();
+        $user->attachRole($role);
 
-        // $role = Role::where('name', 'admin')->first();
-        // $user->attachRole($role);
-
-        // return response()->json('berhasil');
+        return response()->json('berhasil');
     }
 
     /**

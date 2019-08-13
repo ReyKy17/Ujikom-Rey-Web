@@ -34,12 +34,32 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
+                     @role('admin')
+                     <li class="nav-item">
+                         <a class="nav-link" href="/">Menu Admin</a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="/admin/kategori">Menu Member</a>
+                    </li>
+                    @endrole
+
+                    @guest
+                    {{--   --}}
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Menu Random 1</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Menu Random 2</a>
+                        </li>
+                        @endguest
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                        @guest
+                        {{--  @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
@@ -47,7 +67,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
-                            @endif
+                            @endif  --}}
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
