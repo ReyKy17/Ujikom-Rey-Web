@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,4 +15,15 @@
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Auth::routes(['register' => false]);
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'admin ', 'middleware' => ['auth', 'role:superadmin']], function () {
+    Route::get('/', function () {
+        return 'Hello';
+    });
+    Route::resource('user', 'UserController');
 });
